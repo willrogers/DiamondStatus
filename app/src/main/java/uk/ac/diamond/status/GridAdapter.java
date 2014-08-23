@@ -10,11 +10,14 @@ import android.widget.TextView;
 	public class GridAdapter extends BaseAdapter {
 	    private Context mContext;
 	    private TextView[][] items;
-	    private int WIDTH = 3;
+        private int rows;
+	    private int cols;
 
-	    public GridAdapter(Context c, int rows) {
+	    public GridAdapter(Context c, int rows, int cols) {
 	        mContext = c;
-	        items = new TextView[rows][WIDTH];
+            this.rows = rows;
+            this.cols = cols;
+	        items = new TextView[rows][cols];
 	    }
 	    
 	    public void setItems(TextView[][] items) {
@@ -26,11 +29,11 @@ import android.widget.TextView;
 	    }
 
 	    public int getCount() {
-	        return items.length * WIDTH;
+	        return items.length * cols;
 	    }
 
 	    public Object getItem(int position) {
-	    	return items[position / WIDTH][position % WIDTH];
+	    	return items[position / cols][position % cols];
 	    }
 
 	    public long getItemId(int position) {
@@ -38,6 +41,6 @@ import android.widget.TextView;
 	    }
 
 	    public View getView(int position, View convertView, ViewGroup parent) {
-	        return items[position / WIDTH][position % WIDTH];
+	        return items[position / cols][position % cols];
 	    }
 }

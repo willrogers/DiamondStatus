@@ -24,7 +24,7 @@ import android.widget.TextView;
 public class BeamlineFragment extends Fragment implements Refreshable {
 
 	private HashMap<String, String[]> map = null;
-	private StringBuilder tableData = null;
+	private static StringBuilder tableData = null;
 	private TextView[][] views = null;
 	private GridAdapter gridAdapter = null;
 	private GridView gridView = null;
@@ -49,7 +49,7 @@ public class BeamlineFragment extends Fragment implements Refreshable {
 	public void updateTable() {
 		views = new TextView[map.size() + 1][3];
 
-		gridAdapter = new GridAdapter(getActivity(), map.size()+1);
+		gridAdapter = new GridAdapter(getActivity(), map.size()+1, 3);
 
 		System.out.println("In the main process.");
 

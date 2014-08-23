@@ -23,5 +23,6 @@
     <string name="day_url">http://controls.diamond.ac.uk/webstatus/workfiles/statusGraph1024x768.png</string>
     <string name="week_url">http://controls.diamond.ac.uk/webstatus/workfiles/statusGraphWeek1024x768.png</string>
     <string name="table_url">http://controls.diamond.ac.uk/webstatus/workfiles/frontend_data.txt</string>
+    <string name="messages_url">http://controls.diamond.ac.uk/webstatus/workfiles/messages_data.txt</string>
 
 </resources>
