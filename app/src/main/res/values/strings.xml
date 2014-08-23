@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Diamond Status</string>
+    <string name="app_title">Diamond Status</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="msg">Messages from operations</string>
+    <string name="button_send">Send</string>
+    <string name="refresh">Refresh</string>
+    <string name="title_activity_display_message">My Message</string>
+    <string name="week_title">Week view</string>
+    <string name="day_title">Day view</string>
+    <string name="front_end_title">Beamlines</string>
+    <string name="action_search">Search</string>
+    <string name="day">This is the day page</string>
+    <string name="day_image_desc">Day image.</string>
+    <string name="week_image_desc">Week image.</string>
+    <string name="front_end">This is the front end page</string>
+    <string name="week">This is the week page</string>
+    <!-- URLs -->
+    <string name="day_url">http://controls.diamond.ac.uk/webstatus/workfiles/statusGraph1024x768.png</string>
+    <string name="week_url">http://controls.diamond.ac.uk/webstatus/workfiles/statusGraphWeek1024x768.png</string>
+    <string name="table_url">http://controls.diamond.ac.uk/webstatus/workfiles/frontend_data.txt</string>
+
+</resources>

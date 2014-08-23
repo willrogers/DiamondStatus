@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">j
+   <!-- android:id="@+id/ll">-->
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/day_image_desc"
+        android:src="@drawable/images"/>
+    
+	<TextView
+        android:id="@+id/messages"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/msg"/>
+
+</LinearLayout>

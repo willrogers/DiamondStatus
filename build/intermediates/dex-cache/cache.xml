@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/will/code/android/DiamondStatus2/app/build/intermediates/pre-dexed/debug/classes-86b5419e2d3635d9a739c10c1314a99aa6f2b874.jar"
+        jar="/home/will/code/android/DiamondStatus2/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="/home/will/code/android/DiamondStatus2/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-0dcfa8790ba1088f1b6f62799aa1f27460d0aabb.jar"
+        jar="/home/will/code/android/DiamondStatus2/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="/home/will/code/android/DiamondStatus2/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-082e5c9535c1c3ff5b176d8e6456fd32e7308399.jar"
+        jar="/home/will/code/android/android-studio/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+
+</pre-dex-items>

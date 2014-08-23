@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_menu_refresh" 
+        android:title="@string/action_refresh"/>
+
+</menu>
+<!-- From: file:/home/will/code/android/DiamondStatus2/app/src/main/res/menu/main.xml -->
