@@ -68,8 +68,10 @@ public class ImageTask extends AsyncTask<IImageFragment, Void, Bitmap> {
 	protected void onPostExecute(Bitmap bitmap) {
 
 		if (mDialog != null) {
-		mDialog.hide();
+		    mDialog.hide();
 		}
+        System.out.println(imageFragment);
+        System.out.println(bitmap);
         imageFragment.updateImage(bitmap);
 	}
 }

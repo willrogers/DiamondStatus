@@ -44,6 +44,7 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 		super.onCreate(savedInstanceState);
 		tableUrl = getResources().getString(R.string.table_url);
 		new GetTableTask().execute(tableUrl);
+        setRetainInstance(true);
 	}
 
 	public void updateTable() {
@@ -94,10 +95,9 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// Not providing the ViewGroup, because it is specified elsewhere.
-		// Don't understand this yet.
+
 		gridView = (GridView) inflater.inflate(R.layout.front_end_fragment,
-				null);
+				container, false);
 
 		gridView.setAdapter(gridAdapter);
 		gridView.setNumColumns(3);

@@ -55,22 +55,22 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        System.out.println("Creating Day Fragment");
 		imageUrl = getResources().getString(R.string.day_url);
         messagesUrl = getResources().getString(R.string.messages_url);
-		System.out.println("creating day");
 		new ImageTask(getActivity()).execute(this);
         new TextFileTask(getActivity()).execute(this);
+        setRetainInstance(true);
 	}
 
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
-		if (view == null) {
-			view = inflater.inflate(R.layout.image_fragment, null);
-			imageView = (ImageView) view.findViewById(R.id.image);
-			imageView.setScaleType(ScaleType.FIT_CENTER);
-		}
-
+        System.out.println("Creating Day View");
+        view = inflater.inflate(R.layout.image_fragment, null);
+        imageView = (ImageView) view.findViewById(R.id.image);
+        imageView.setScaleType(ScaleType.FIT_CENTER);
+        refresh();
 		return view;
 	}
 
@@ -84,8 +84,11 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         System.out.println("updating image");
         if (bm != null) {
             dayImage = bm;
-            BitmapDrawable bd = new BitmapDrawable(getResources(), dayImage);
-            imageView.setImageDrawable(bd);
+            if (imageView != null) {
+                BitmapDrawable bd = new BitmapDrawable(getResources(), dayImage);
+                System.out.println("image view: " + imageView);
+                imageView.setImageDrawable(bd);
+            }
         } else {
             System.out.println("no connection");
             noConnection();
@@ -107,9 +110,11 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
                 out.append(titles.get(key) + ": " + entries.get(key) + "\n");
             }
         }
-        TextView tv = (TextView) view.findViewById(R.id.message_view);
-        System.out.println("setting messages to " + sb.toString());
-        tv.setText(out.toString());
+        if (view != null) {
+            TextView tv = (TextView) view.findViewById(R.id.message_view);
+            System.out.println("setting messages to " + sb.toString());
+            tv.setText(out.toString());
+        }
     }
 
 	@Override
