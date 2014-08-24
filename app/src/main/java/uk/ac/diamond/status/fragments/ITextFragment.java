@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import java.net.URL;
 
 
-public interface ITextFragment {
+public interface ITextFragment extends INetworkFragment {
 	
 	public void updateText(StringBuilder sb);
 	

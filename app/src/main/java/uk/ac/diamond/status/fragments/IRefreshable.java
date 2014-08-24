@@ -1,6 +1,6 @@
 package uk.ac.diamond.status.fragments;
 
-public interface Refreshable {
+public interface IRefreshable {
 
 	void refresh();
 }

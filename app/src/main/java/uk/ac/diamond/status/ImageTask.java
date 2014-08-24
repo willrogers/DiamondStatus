@@ -70,12 +70,6 @@ public class ImageTask extends AsyncTask<IImageFragment, Void, Bitmap> {
 		if (mDialog != null) {
 		mDialog.hide();
 		}
-		if (this.exception != null) {
-			this.exception.printStackTrace();
-		} else {
-
-			image = bitmap;
-			imageFragment.updateImage(image);
-		}
+        imageFragment.updateImage(bitmap);
 	}
 }

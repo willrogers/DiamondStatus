@@ -25,12 +25,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="uk.ac.diamond.status.DisplayMessageActivity"
+            android:name="uk.ac.diamond.status.NoConnectionActivity"
             android:label="@string/title_activity_display_message"
             android:parentActivityName="uk.ac.diamond.status.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.ac.diamond.helloworld.MainActivity" />
+                android:value="uk.ac.diamond.status.MainActivity" />
         </activity>
     </application>
 

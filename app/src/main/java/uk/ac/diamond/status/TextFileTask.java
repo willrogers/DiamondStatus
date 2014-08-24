@@ -19,6 +19,7 @@ public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> 
     private Context context;
     private static boolean firstRun = true;
     private ITextFragment textFragment;
+    private int refreshCount = 0;
 
 	public TextFileTask(Context context) {
 		this.context = context;
@@ -81,7 +82,9 @@ public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> 
             mDialog.hide();
         }
         if (sb != null) {
+            sb.append("update=" + ++refreshCount);
             textFragment.updateText(sb);
+
 
         }
     }

@@ -1,9 +1,8 @@
 package uk.ac.diamond.status;
 
-import uk.ac.diamond.status.R;
 import uk.ac.diamond.status.fragments.DayFragment;
 import uk.ac.diamond.status.fragments.BeamlineFragment;
-import uk.ac.diamond.status.fragments.Refreshable;
+import uk.ac.diamond.status.fragments.IRefreshable;
 import uk.ac.diamond.status.fragments.WeekFragment;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -22,7 +21,7 @@ public class MainActivity extends Activity  {
 	private static final String DAY_FRAGMENT = "day fragment";
 	private static final String WEEK_FRAGMENT = "week fragment";
 	private static final String FE_FRAGMENT = "front end fragment";
-	private static Refreshable currentFragment = null; 
+	private static IRefreshable currentFragment = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,8 @@ public class MainActivity extends Activity  {
 	
 	public void refresh() {
 		Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
-		if (currentFragment != null) {
+        System.out.println("Refreshing " + currentFragment);
+        if (currentFragment != null) {
 			currentFragment.refresh();
 		}
 	}
@@ -136,7 +136,7 @@ public class MainActivity extends Activity  {
 	            ft.attach(mFragment);
 	        }
 	        
-	        currentFragment = (Refreshable) mFragment;
+	        currentFragment = (IRefreshable) mFragment;
 	    }
 
 	    public void onTabUnselected(Tab tab, FragmentTransaction ft) {

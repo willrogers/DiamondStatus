@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
-public class BeamlineFragment extends Fragment implements Refreshable {
+public class BeamlineFragment extends Fragment implements IRefreshable {
 
 	private HashMap<String, String[]> map = null;
 	private static StringBuilder tableData = null;
