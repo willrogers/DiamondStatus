@@ -11,6 +11,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MainActivity extends Activity  {
 	private static final String WEEK_FRAGMENT = "week fragment";
 	private static final String FE_FRAGMENT = "front end fragment";
 	private static IRefreshable currentFragment = null;
+    private static final String LOG_TAG = "MainActivity";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,13 @@ public class MainActivity extends Activity  {
 	    actionBar.setDisplayShowTitleEnabled(true);
 	    
 
-	    System.out.println("Creating day fragment");
+	    Log.d(LOG_TAG, "Creating day fragment");
 	    // One TabListener for every tab
 	    Tab tab = actionBar.newTab()
 	                       .setText(R.string.day_title)
 	                       .setTabListener(new TabListener<DayFragment>(
 	                               this, DAY_FRAGMENT, DayFragment.class));
-	    System.out.println("Created day fragment");
+	    Log.d(LOG_TAG, "Created day fragment");
 	    actionBar.addTab(tab);
 	    tab = actionBar.newTab()
 	                   .setText(R.string.week_title)
@@ -66,7 +68,7 @@ public class MainActivity extends Activity  {
 	
 	public void refresh() {
 		Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
-        System.out.println("Refreshing " + currentFragment);
+        Log.d(LOG_TAG, "Refreshing " + currentFragment);
         if (currentFragment != null) {
 			currentFragment.refresh();
 		}

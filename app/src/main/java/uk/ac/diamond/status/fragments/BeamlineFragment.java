@@ -15,6 +15,7 @@ import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 public class BeamlineFragment extends Fragment implements IRefreshable {
+
+    private static final String LOG_TAG = "BeamlineFragment";
 
 	private HashMap<String, String[]> map = null;
 	private static StringBuilder tableData = null;
@@ -51,7 +54,7 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 
 		gridAdapter = new GridAdapter(getActivity(), map.size()+1, 3);
 
-		System.out.println("In the main process.");
+		Log.d(LOG_TAG, "In the main process.");
 
 		TextView idView = new TextView(getActivity());
 		idView.setText("Insertion Device");
@@ -74,7 +77,7 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 
 		int j = 1;
 		for (Map.Entry<String, String[]> entry : map.entrySet()) {
-			System.out.println("In the loop: " + entry.getKey());
+			Log.d(LOG_TAG, "In the loop: " + entry.getKey());
 
 			TextView id = new TextView(getActivity());
 			id.setText(entry.getKey().toString());
@@ -110,7 +113,7 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 		String[] lines = tableData.toString().split("\n");
 
 		for (String line : lines) {
-			System.out.println(line);
+			Log.d(LOG_TAG, line);
 			if (line.startsWith("name_")) {
 				String l = line.substring(5);
 				String[] parts = l.split("=");
@@ -167,7 +170,7 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 						sb.append(str + '\n');
 					}
 					in.close();
-					System.out.println("Finished getting the string.");
+					Log.d(LOG_TAG, "Finished getting the string.");
 					tableData = sb;
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
@@ -177,7 +180,7 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 				return sb;
 			} catch (Exception e) {
 				this.exception = e;
-				System.out.println("Whoopsies.");
+				Log.d(LOG_TAG, "Whoopsies.");
 				return null;
 			}
 		}
@@ -200,7 +203,7 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 			if (sb != null) {
 				tableData = sb;
 				map = parseTable(tableData.toString());
-				System.out.println("Calling updateTable");
+				Log.d(LOG_TAG, "Calling updateTable");
 				updateTable();
 				gridView.invalidateViews();
 				gridView.setAdapter(gridAdapter);

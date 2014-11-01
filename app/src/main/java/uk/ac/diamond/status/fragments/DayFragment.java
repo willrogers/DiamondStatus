@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 	protected String imageUrl = null;
     private String messagesUrl = null;
 	private View view = null;
+
+    private static final String LOG_TAG = "DayFragment";
 
     private static HashMap<String, String> titles = new HashMap<String, String>();
     static {
@@ -48,7 +51,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 
 	@Override
 	public Context getContext() {
-		System.out.println("Getting activity");
+		Log.d(LOG_TAG, "Getting activity");
 		return getActivity();
 	}
 	
@@ -57,7 +60,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 		super.onCreate(savedInstanceState);
 		imageUrl = getResources().getString(R.string.day_url);
         messagesUrl = getResources().getString(R.string.messages_url);
-		System.out.println("creating day");
+		Log.d(LOG_TAG, "creating day");
 		new ImageTask(getActivity()).execute(this);
         new TextFileTask(getActivity()).execute(this);
 	}
@@ -81,13 +84,13 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 
 	@Override
 	public void updateImage(Bitmap bm) {
-        System.out.println("updating image");
+        Log.d(LOG_TAG, "updating image");
         if (bm != null) {
             dayImage = bm;
             BitmapDrawable bd = new BitmapDrawable(getResources(), dayImage);
             imageView.setImageDrawable(bd);
         } else {
-            System.out.println("no connection");
+            Log.i(LOG_TAG, "updateImage called with null bitmap.");
             noConnection();
         }
 	}
@@ -98,7 +101,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         StringBuilder out = new StringBuilder();
         HashMap<String, String> entries = new HashMap<String, String>();
         for (String line : lines) {
-            System.out.println(line);
+            Log.d(LOG_TAG, line);
             String[] parts = line.split("=");
             entries.put(parts[0], parts.length > 1 ? parts[1] : "");
         }
@@ -108,7 +111,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
             }
         }
         TextView tv = (TextView) view.findViewById(R.id.message_view);
-        System.out.println("setting messages to " + sb.toString());
+        Log.d(LOG_TAG, "setting messages to " + sb.toString());
         tv.setText(out.toString());
     }
 
@@ -130,6 +133,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 
     @Override
     public void noConnection() {
+        Log.d(LOG_TAG, "Calling noConnection()");
         Intent intent = new Intent(getContext(), NoConnectionActivity.class);
         startActivity(intent);
     }

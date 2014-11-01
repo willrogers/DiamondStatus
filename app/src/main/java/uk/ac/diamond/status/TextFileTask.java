@@ -3,6 +3,7 @@ package uk.ac.diamond.status;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.net.URL;
 import uk.ac.diamond.status.fragments.ITextFragment;
 
 public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> {
+
+    private static final String LOG_TAG = "TextFileTask";
 
     private Exception exception;
     private ProgressDialog mDialog;
@@ -32,10 +35,10 @@ public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> 
 		try {
 
 			try {
-                System.out.println("Running messages");
+                Log.d(LOG_TAG, "Running messages");
                 textFragment= imfs[0];
 				URL url = new URL(textFragment.getTextFileUrl());
-                System.out.println(url);
+                Log.d(LOG_TAG, url.toString());
                 String str;
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(url.openStream()));
@@ -45,20 +48,19 @@ public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> 
                     sb.append(str + '\n');
                 }
                 in.close();
-                System.out.println("Finished getting the string.");
+                Log.d(LOG_TAG, "Finished getting the string.");
 
 			} catch (MalformedURLException e) {
-                System.out.println("mue");
+                Log.d(LOG_TAG, "Malformed URL: " + e);
                 this.exception = e;
 			} catch (IOException e) {
-                System.out.println("ioe" + e);
+                Log.d(LOG_TAG, "IO Exception" + e);
                 this.exception = e;
 			}
-            System.out.println("returning " + sb);
+            Log.d(LOG_TAG, "returning " + sb);
             return sb;
 		} catch (Exception e) {
 			this.exception = e;
-			System.out.println("Whoopsies.");
 			return null;
 		}
 	}
@@ -77,14 +79,13 @@ public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> 
     }
 
     protected void onPostExecute(StringBuilder sb) {
-        System.out.println("post executing" + sb);
+        Log.d(LOG_TAG, "post executing" + sb);
         if (mDialog != null) {
             mDialog.hide();
         }
         if (sb != null) {
             sb.append("update=" + ++refreshCount);
             textFragment.updateText(sb);
-
 
         }
     }

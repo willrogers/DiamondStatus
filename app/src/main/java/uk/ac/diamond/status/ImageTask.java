@@ -11,10 +11,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class ImageTask extends AsyncTask<IImageFragment, Void, Bitmap> {
 
-	private Context context = null;
+    private static final String LOG_TAG = "ImageTask";
+
+    private Context context = null;
 	private Exception exception = null;
 	private Bitmap image = null;
 	private IImageFragment imageFragment = null;
@@ -36,18 +39,20 @@ public class ImageTask extends AsyncTask<IImageFragment, Void, Bitmap> {
 				URL url = imageFragment.getUrl();
 				InputStream in = url.openConnection().getInputStream();
 				bm = BitmapFactory.decodeStream(in);
-				System.out.println("Finished getting the image.");
+				Log.d(LOG_TAG, "Finished getting the image.");
 				image = bm;
 			} catch (MalformedURLException e) {
+                Log.d(LOG_TAG, "Malformed URL: " + e);
 				this.exception = e;
 			} catch (IOException e) {
+                Log.d(LOG_TAG, "IO Exception: " + e);
 				this.exception = e;
 			}
 
 			return bm;
 		} catch (Exception e) {
 			this.exception = e;
-			System.out.println("Whoopsies.");
+			Log.d(LOG_TAG, "Unexpected exception fetching image: " + e);
 			return null;
 		}
 	}
