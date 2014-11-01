@@ -7,11 +7,11 @@ import android.graphics.Bitmap;
 
 
 public interface IImageFragment extends INetworkFragment {
-	
-	public void updateImage(Bitmap bm);
-	
-	public URL getUrl();
-	
-	public Context getContext();
-	
+
+    public void updateImage(Bitmap bm);
+
+    public URL getUrl();
+
+    public Context getContext();
+
 }

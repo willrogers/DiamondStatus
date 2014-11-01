@@ -26,15 +26,16 @@ import android.widget.TextView;
 public class DayFragment extends Fragment implements IImageFragment, ITextFragment,
         IRefreshable {
 
-	private ImageView imageView = null;
-	private Bitmap dayImage = null;
-	protected String imageUrl = null;
+    private ImageView imageView = null;
+    private Bitmap dayImage = null;
+    protected String imageUrl = null;
     private String messagesUrl = null;
-	private View view = null;
+    private View view = null;
 
     private static final String LOG_TAG = "DayFragment";
 
     private static HashMap<String, String> titles = new HashMap<String, String>();
+
     static {
         titles.put("energy", "Beam Energy");
         titles.put("current", "Beam current");
@@ -46,45 +47,45 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         titles.put("update", "Update");
     }
 
-	public DayFragment() {
-	}
+    public DayFragment() {
+    }
 
-	@Override
-	public Context getContext() {
-		Log.d(LOG_TAG, "Getting activity");
-		return getActivity();
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		imageUrl = getResources().getString(R.string.day_url);
+    @Override
+    public Context getContext() {
+        Log.d(LOG_TAG, "Getting activity");
+        return getActivity();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        imageUrl = getResources().getString(R.string.day_url);
         messagesUrl = getResources().getString(R.string.messages_url);
-		Log.d(LOG_TAG, "creating day");
-		new ImageTask(getActivity()).execute(this);
-        new TextFileTask(getActivity()).execute(this);
-	}
-
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		if (view == null) {
-			view = inflater.inflate(R.layout.image_fragment, null);
-			imageView = (ImageView) view.findViewById(R.id.image);
-			imageView.setScaleType(ScaleType.FIT_CENTER);
-		}
-
-		return view;
-	}
-
-	public void refresh() {
+        Log.d(LOG_TAG, "creating day");
         new ImageTask(getActivity()).execute(this);
         new TextFileTask(getActivity()).execute(this);
-	}
+    }
 
-	@Override
-	public void updateImage(Bitmap bm) {
-        Log.d(LOG_TAG, "updating image");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        if (view == null) {
+            view = inflater.inflate(R.layout.image_fragment, null);
+            imageView = (ImageView) view.findViewById(R.id.image);
+            imageView.setScaleType(ScaleType.FIT_CENTER);
+        }
+
+        return view;
+    }
+
+    public void refresh() {
+        new ImageTask(getActivity()).execute(this);
+        new TextFileTask(getActivity()).execute(this);
+    }
+
+    @Override
+    public void updateImage(Bitmap bm) {
+        Log.d(LOG_TAG, "Updating image.");
         if (bm != null) {
             dayImage = bm;
             BitmapDrawable bd = new BitmapDrawable(getResources(), dayImage);
@@ -93,7 +94,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
             Log.i(LOG_TAG, "updateImage called with null bitmap.");
             noConnection();
         }
-	}
+    }
 
     @Override
     public void updateText(StringBuilder sb) {
@@ -115,16 +116,16 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         tv.setText(out.toString());
     }
 
-	@Override
-	public URL getUrl() {
-		URL url = null;
-		try {
-			url = new URL(imageUrl);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		return url;
-	}
+    @Override
+    public URL getUrl() {
+        URL url = null;
+        try {
+            url = new URL(imageUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
 
     @Override
     public String getTextFileUrl() {
@@ -137,5 +138,4 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         Intent intent = new Intent(getContext(), NoConnectionActivity.class);
         startActivity(intent);
     }
-
 }

@@ -24,20 +24,20 @@ public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> 
     private ITextFragment textFragment;
     private int refreshCount = 0;
 
-	public TextFileTask(Context context) {
-		this.context = context;
-	}
+    public TextFileTask(Context context) {
+        this.context = context;
+    }
 
-	@Override
-	protected StringBuilder doInBackground(ITextFragment... imfs) {
-		StringBuilder sb = null;
+    @Override
+    protected StringBuilder doInBackground(ITextFragment... imfs) {
+        StringBuilder sb = null;
 
-		try {
+        try {
 
-			try {
+            try {
                 Log.d(LOG_TAG, "Running messages");
-                textFragment= imfs[0];
-				URL url = new URL(textFragment.getTextFileUrl());
+                textFragment = imfs[0];
+                URL url = new URL(textFragment.getTextFileUrl());
                 Log.d(LOG_TAG, url.toString());
                 String str;
                 BufferedReader in = new BufferedReader(
@@ -50,29 +50,29 @@ public class TextFileTask extends AsyncTask<ITextFragment, Void, StringBuilder> 
                 in.close();
                 Log.d(LOG_TAG, "Finished getting the string.");
 
-			} catch (MalformedURLException e) {
+            } catch (MalformedURLException e) {
                 Log.d(LOG_TAG, "Malformed URL: " + e);
                 this.exception = e;
-			} catch (IOException e) {
+            } catch (IOException e) {
                 Log.d(LOG_TAG, "IO Exception" + e);
                 this.exception = e;
-			}
+            }
             Log.d(LOG_TAG, "returning " + sb);
             return sb;
-		} catch (Exception e) {
-			this.exception = e;
-			return null;
-		}
-	}
-	
+        } catch (Exception e) {
+            this.exception = e;
+            return null;
+        }
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         if (firstRun) {
-        mDialog = new ProgressDialog(context);
-        mDialog.setMessage("Please wait...");
-        mDialog.show();
-        firstRun = false;
+            mDialog = new ProgressDialog(context);
+            mDialog.setMessage("Please wait...");
+            mDialog.show();
+            firstRun = false;
         }
 
 

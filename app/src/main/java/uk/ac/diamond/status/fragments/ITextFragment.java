@@ -7,11 +7,11 @@ import java.net.URL;
 
 
 public interface ITextFragment extends INetworkFragment {
-	
-	public void updateText(StringBuilder sb);
-	
-	public String getTextFileUrl();
-	
-	public Context getContext();
-	
+
+    public void updateText(StringBuilder sb);
+
+    public String getTextFileUrl();
+
+    public Context getContext();
+
 }
