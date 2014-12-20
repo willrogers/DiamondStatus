@@ -3,6 +3,7 @@ package uk.ac.diamond.status.fragments;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import uk.ac.diamond.status.NoConnectionActivity;
 import uk.ac.diamond.status.TextFileTask;
@@ -34,7 +35,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 
     private static final String LOG_TAG = "DayFragment";
 
-    private static HashMap<String, String> titles = new HashMap<String, String>();
+    private static LinkedHashMap<String, String> titles = new LinkedHashMap<String, String>();
 
     static {
         titles.put("energy", "Beam Energy");
@@ -106,8 +107,8 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
             String[] parts = line.split("=");
             entries.put(parts[0], parts.length > 1 ? parts[1] : "");
         }
-        for (String key : entries.keySet()) {
-            if (titles.containsKey(key)) {
+        for (String key : titles.keySet()) {
+            if (entries.containsKey(key)) {
                 out.append(titles.get(key) + ": " + entries.get(key) + "\n");
             }
         }
