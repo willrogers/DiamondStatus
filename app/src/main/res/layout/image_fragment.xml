@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,16 +11,20 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:contentDescription="@string/day_image_desc"
-        android:src="@drawable/images"/>
+        android:layout_alignParentTop="true"
+        android:src="@drawable/loading"/>
 
     <Space
+        android:id="@+id/space1"
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:layout_below="@+id/image"
         android:layout_gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/messages"
         android:layout_width="fill_parent"
+        android:layout_below="@+id/space1"
         android:layout_height="wrap_content"
         android:text="@string/machine_status"
         android:textStyle="bold" />
@@ -31,9 +35,24 @@
         android:layout_gravity="center_horizontal" />
 
     <TextView
+        android:layout_below="@+id/messages"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/message_view"
         android:layout_gravity="center_horizontal" />
 
-</LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="100px"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/updated_view"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold" />
+
+</RelativeLayout>

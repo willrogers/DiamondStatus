@@ -20,6 +20,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
@@ -43,7 +45,6 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         titles.put("life_time", "Beam lifetime");
         titles.put("mode", "Mode");
         titles.put("refill", "??");
-        titles.put("updated_at", "Last updated");
         titles.put("fill_pattern", "Fill pattern");
         titles.put("update", "Update");
     }
@@ -113,8 +114,10 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
             }
         }
         TextView tv = (TextView) view.findViewById(R.id.message_view);
-        Log.d(LOG_TAG, "setting messages to " + sb.toString());
         tv.setText(out.toString());
+
+        TextView updatedTv = (TextView) view.findViewById(R.id.updated_view);
+        updatedTv.setText("Last updated: " + entries.get("updated_at"));
     }
 
     @Override
@@ -138,5 +141,13 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         Log.d(LOG_TAG, "Calling noConnection()");
         Intent intent = new Intent(getContext(), NoConnectionActivity.class);
         startActivity(intent);
+    }
+
+    public void alertUpdate() {
+        Log.d(LOG_TAG,"animating");
+        TextView updatedTv = (TextView) view.findViewById(R.id.updated_view);
+        Animation bulgeAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.bulge);
+        updatedTv.startAnimation(bulgeAnimation);
+
     }
 }
