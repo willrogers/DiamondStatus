@@ -110,7 +110,6 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 
     private HashMap<String, String[]> parseTable(String data) {
         HashMap<String, String[]> map = new HashMap<String, String[]>();
-        String sep = System.getProperty("line.separator");
         String[] lines = tableData.toString().split("\n");
 
         for (String line : lines) {
@@ -118,7 +117,6 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
             if (line.startsWith("name_")) {
                 String l = line.substring(5);
                 String[] parts = l.split("=");
-                int id = Integer.valueOf(parts[0]);
                 String name = parts[1];
                 String[] values = new String[10];
                 /* Put empty values in the map */
