@@ -2,9 +2,12 @@ package uk.ac.diamond.status.fragments;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import uk.ac.diamond.status.MainActivity;
 import uk.ac.diamond.status.NoConnectionActivity;
 import uk.ac.diamond.status.TextFileTask;
 import uk.ac.diamond.status.R;
@@ -36,6 +39,7 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
     private View view = null;
 
     private static final String LOG_TAG = "DayFragment";
+    private Date lastUpdated = null;
 
     private static LinkedHashMap<String, String> titles = new LinkedHashMap<String, String>();
 
@@ -44,9 +48,8 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         titles.put("current", "Beam current");
         titles.put("life_time", "Beam lifetime");
         titles.put("mode", "Mode");
-        titles.put("refill", "??");
+        titles.put("last_refill", "Last fill");
         titles.put("fill_pattern", "Fill pattern");
-        titles.put("update", "Update");
     }
 
     public DayFragment() {
@@ -66,6 +69,10 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         Log.d(LOG_TAG, "creating day");
         new ImageTask(getActivity()).execute(this);
         new TextFileTask(getActivity()).execute(this);
+        if (lastUpdated == null || (new Date()).getTime() - lastUpdated.getTime() > 60) {
+            MainActivity ma = (MainActivity) getActivity();
+            ma.needsUpdate();
+        }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,8 +123,16 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         TextView tv = (TextView) view.findViewById(R.id.message_view);
         tv.setText(out.toString());
 
-        TextView updatedTv = (TextView) view.findViewById(R.id.updated_view);
-        updatedTv.setText("Last updated: " + entries.get("updated_at"));
+        Date date = null;
+        String dateString = entries.get("updated_at");
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+        try {
+            date = format.parse(dateString);
+            System.out.println("Date ->" + date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ((MainActivity) getActivity()).alertUpdate(date);
     }
 
     @Override
@@ -145,9 +160,8 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
 
     public void alertUpdate() {
         Log.d(LOG_TAG,"animating");
-        TextView updatedTv = (TextView) view.findViewById(R.id.updated_view);
-        Animation bulgeAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.bulge);
-        updatedTv.startAnimation(bulgeAnimation);
+        MainActivity parent = (MainActivity) getActivity();
+        //parent.alertUpdate();
 
     }
 }

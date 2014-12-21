@@ -10,13 +10,19 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -68,11 +74,24 @@ public class MainActivity extends Activity {
     }
 
     public void refresh() {
-        Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
         Log.d(LOG_TAG, "Refreshing " + currentFragment);
         if (currentFragment != null) {
             currentFragment.refresh();
         }
+    }
+
+    public void alertUpdate(Date date) {
+        TextView updatedTv = (TextView) findViewById(R.id.updated_view);
+        DateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        updatedTv.setText(f.format(date));
+        Animation bulgeAnimation = AnimationUtils.loadAnimation(this, R.anim.bulge);
+        updatedTv.startAnimation(bulgeAnimation);
+        updatedTv.setTextColor(Color.WHITE);
+    }
+
+    public void needsUpdate() {
+        TextView updatedTv = (TextView) findViewById(R.id.updated_view);
+        updatedTv.setTextColor(Color.RED);
     }
 
     @Override
@@ -91,20 +110,9 @@ public class MainActivity extends Activity {
             case R.id.action_refresh:
                 refresh();
                 return true;
-//		case R.id.action_settings:
-            //		openSettings();
-            //		return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void sendMessage(View view) {
-//		Intent intent = new Intent(this, DisplayMessageActivity.class);
-//		EditText editText = (EditText) findViewById(R.id.edit_message);
-//		String message = editText.getText().toString();
-//		intent.putExtra(EXTRA_MESSAGE, message);
-//		startActivity(intent);
     }
 
     /**
