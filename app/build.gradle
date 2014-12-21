@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "uk.ac.diamond.status"
-        minSdkVersion 18
+        minSdkVersion 15
         targetSdkVersion 18
     }
 
