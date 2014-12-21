@@ -12,8 +12,4 @@ public interface IImageFragment extends INetworkFragment {
 
     public URL getUrl();
 
-    public Context getContext();
-
-    public void alertUpdate();
-
 }

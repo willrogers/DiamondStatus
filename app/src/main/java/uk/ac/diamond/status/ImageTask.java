@@ -77,6 +77,5 @@ public class ImageTask extends AsyncTask<IImageFragment, Void, Bitmap> {
             mDialog.hide();
         }
         imageFragment.updateImage(bitmap);
-        imageFragment.alertUpdate();
     }
 }

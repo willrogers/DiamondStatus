@@ -60,17 +60,14 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
         TextView idView = new TextView(getActivity());
         idView.setText("Insertion Device");
         idView.setTypeface(Typeface.DEFAULT_BOLD);
-        // gridLayout.addView(idView);
 
         TextView gapView = new TextView(getActivity());
         gapView.setText("Gap (mm)");
         gapView.setTypeface(Typeface.DEFAULT_BOLD);
-        // .addView(gapView);
 
         TextView fieldView = new TextView(getActivity());
         fieldView.setText("Field (T)");
         fieldView.setTypeface(Typeface.DEFAULT_BOLD);
-        // gridLayout.addView(fieldView);
 
         views[0][0] = idView;
         views[0][1] = gapView;
@@ -78,7 +75,6 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
 
         int j = 1;
         for (Map.Entry<String, String[]> entry : map.entrySet()) {
-            Log.d(LOG_TAG, "In the loop: " + entry.getKey());
 
             TextView id = new TextView(getActivity());
             id.setText(entry.getKey().toString());
@@ -113,7 +109,6 @@ public class BeamlineFragment extends Fragment implements IRefreshable {
         String[] lines = tableData.toString().split("\n");
 
         for (String line : lines) {
-            Log.d(LOG_TAG, line);
             if (line.startsWith("name_")) {
                 String l = line.substring(5);
                 String[] parts = l.split("=");

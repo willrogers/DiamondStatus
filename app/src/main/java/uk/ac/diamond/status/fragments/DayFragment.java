@@ -158,10 +158,4 @@ public class DayFragment extends Fragment implements IImageFragment, ITextFragme
         startActivity(intent);
     }
 
-    public void alertUpdate() {
-        Log.d(LOG_TAG,"animating");
-        MainActivity parent = (MainActivity) getActivity();
-        //parent.alertUpdate();
-
-    }
 }
